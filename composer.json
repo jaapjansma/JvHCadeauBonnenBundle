@@ -1,0 +1,29 @@
+{
+  "name":"jvh/cadeau-bonnen-bundle",
+  "description":"Cadeaubonnen functionaliteit voor JvH",
+  "type": "contao-bundle",
+  "license":"LGPL-3.0-or-later",
+  "version": "1.1.0",
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../SnelstartBundle"
+    }
+  ],
+  "require": {
+    "contao/core-bundle": "^4.9",
+    "symfony/config": "^4.4 || ^5.1",
+    "symfony/dependency-injection": "^4.4 || ^5.1",
+    "symfony/http-kernel": "^4.4 || ^5.1",
+    "iwd-nl/snelstart-php": "*",
+    "krabo/snelstart-bundle": "^1.3.0"
+  },
+  "extra": {
+    "contao-manager-plugin": "JvH\\CadeauBonnenBundle\\ContaoManager\\Plugin"
+  },
+  "autoload": {
+    "psr-4": {
+      "JvH\\CadeauBonnenBundle\\": "src/"
+    }
+  }
+}

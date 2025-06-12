@@ -1,0 +1,27 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  jvh.cadeabonnen.notificationhelper:
+    class: 'JvH\CadeauBonnenBundle\Helper\NotificationHelper'
+    arguments:
+      - '@contao.framework'
+
+  jvh.cadeabonnen.snelstartverkoopgrootboekrekening:
+    class: 'JvH\CadeauBonnenBundle\Helper\SnelstartVerkoopGrootboekRekening'
+    arguments:
+      - '%jvh.cadeabonnen.verkoop_grootboek_cadeabonnen_nl%'
+      - '%jvh.cadeabonnen.verkoop_grootboek_cadeabonnen_eu%'
+      - '%jvh.cadeabonnen.verkoop_grootboek_cadeabonnen_wereld%'
+      - '@krabo.snelstart.grootboek'
+      - '@krabo.snelstart.btwhelper'
+
+  jvh.cadeabonnen.snelstart:
+    class: 'JvH\CadeauBonnenBundle\Listener\Snelstart'
+    arguments:
+      - '@krabo.snelstart.factory'
+      - '@krabo.snelstart.dagboek'
+      - '@jvh.cadeabonnen.snelstartverkoopgrootboekrekening'
+      - '%jvh.cadeabonnen.grootboek_cadeabonnen%'

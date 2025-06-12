@@ -1,0 +1,11 @@
+<?php $this->block('content'); ?>
+
+<div class="cadeaubon-checkker">
+<form>
+  <label><?=$GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['code']; ?></label>
+  <input name="code" value="<?=$this->code; ?>" type="text" />
+  <input type="submit" value="<?=$GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['submit']; ?>" />
+  <?php if (strlen($this->status)): ?>
+    <p class="status"><?=$this->status; ?></p>
+  <?php endif; ?>
+</form>
