@@ -23,6 +23,7 @@ class CalculatePrice {
         if ( !($objSource instanceof IsotopePrice) ||
             ($strField !== 'price' && $strField !== 'low_price') ||
             !is_array($arrOptions) ||
+            !isset($arrOptions['cadeaubon_bedrag']) ||
             !$arrOptions['cadeaubon_bedrag']
         )
         {
