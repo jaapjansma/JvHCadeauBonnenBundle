@@ -3,7 +3,7 @@
   "description":"Cadeaubonnen functionaliteit voor JvH",
   "type": "contao-bundle",
   "license":"LGPL-3.0-or-later",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "repositories": [
     {
       "type": "path",
