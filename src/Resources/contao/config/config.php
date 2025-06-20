@@ -12,6 +12,7 @@ $GLOBALS['FE_MOD']['isotope']['mod_jvh_cadeau_bonnen_checker'] = \JvH\CadeauBonn
  * Hooks
  */
 $GLOBALS['ISO_HOOKS']['calculatePrice'][] = array('JvH\CadeauBonnenBundle\Listener\CalculatePrice', 'run');
+$GLOBALS['ISO_HOOKS']['addCollectionToTemplate'][]                  = array('JvH\CadeauBonnenBundle\Listener\UseCadaubon', 'addCollectionToTemplate');
 $GLOBALS['ISO_HOOKS']['preCheckout'][]                  = array('JvH\CadeauBonnenBundle\Listener\UseCadaubon', 'preCheckout');
 $GLOBALS['ISO_HOOKS']['postCheckout'][]                  = array('JvH\CadeauBonnenBundle\Listener\UseCadaubon', 'postCheckout');
 $GLOBALS['ISO_HOOKS']['postOrderStatusUpdate'][] = array('JvH\CadeauBonnenBundle\Listener\GenerateCadaubon', 'PostOrderStatusUpdate');
