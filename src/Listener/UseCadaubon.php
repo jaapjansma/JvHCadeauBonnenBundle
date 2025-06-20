@@ -105,6 +105,9 @@ class UseCadaubon
         $saldo = (float) $surchargeTotal + (float)$objCollection->getSubtotal();
         foreach ($arrRules as $rule) {
           $changedRules[$rule->id]['label'] = $rule->label;
+          if (empty($rule->label)) {
+            $changedRules[$rule->id]['label'] = $rule->name;
+          }
           $changedRules[$rule->id]['code'] = $rule->code;
           $changedRules[$rule->id]['available_discount_amount'] = (float) $rule->discount;
           if ($saldo < 0 && $rule->discount > $saldo) {
