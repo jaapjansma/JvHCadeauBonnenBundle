@@ -42,7 +42,7 @@ class GenerateCadaubon {
 
         if (!$wasPaid && $newStatus->isPaid()) {
             foreach ($order->getItems() as $item) {
-                if ($item->getProduct() && $item->getProduct() instanceof Cadeaubon) {
+                if (($product = $item->getProduct()) && $product instanceof Cadeaubon) {
                     for($i=0; $i < $item->quantity; $i++) {
                         $rule = new Rule();
                         $rule->type = 'cart';
@@ -66,12 +66,16 @@ class GenerateCadaubon {
                         $rule->productCondition = 1;
                         $rule->enabled = 1;
                         $rule->jvh_cadeaubon = 1;
+                        $rule->product_collection_item_id = $item->id;
+                        $rule->email = $order->getEmailRecipient();
                         $endDate = new \DateTime();
                         $endDate->modify('+3 year');
                         $rule->endDate = $endDate->getTimestamp();
                         $rule->code = $this->getUniqueCode($order->getId());
                         $rule->save();
-                        $this->notificationHelper->sendCodePerEmail($item, $order, $rule);
+                        if ($product->isPerEmail()) {
+                          $this->notificationHelper->sendCodePerEmail('jvh_cadeaubon_created', $rule, $item, $order);
+                        }
                     }
                 }
             }
@@ -83,8 +87,9 @@ class GenerateCadaubon {
      *
      * @see CodeGenerator::generateCode()
      * @param $orderId
+     * @return string
      */
-    public function getUniqueCode($orderId) {
+    public function getUniqueCode($orderId): string {
         do {
             $code = $this->generateCode($orderId);
             $rule = Rule::findBy(array('code = ?'), array($code));
@@ -100,7 +105,7 @@ class GenerateCadaubon {
      * @param $orderId
      * @return string
      */
-    public function generateCode($orderId) {
+    public function generateCode($orderId): string {
         $numbers = "0123456789";
         $res = "";
         for ($i = 0; $i < 4; $i++) {

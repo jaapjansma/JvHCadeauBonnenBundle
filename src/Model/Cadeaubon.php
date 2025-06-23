@@ -42,6 +42,25 @@ class Cadeaubon extends Standard implements WeightAggregate
     $return = parent::isExemptFromShipping();
   }
 
+  public function isPerEmail(): bool
+  {
+    $optionFields = $this->getOptions();
+    if (!empty($optionFields)) {
+      $db = Database::getInstance();
+      foreach ($optionFields as $field => $selectedOptions) {
+        $objResult = $db->prepare("SELECT `tl_iso_attribute_option`.`id` AS `id` FROM `tl_iso_attribute` INNER JOIN `tl_iso_attribute_option` ON `tl_iso_attribute`.`id` = `tl_iso_attribute_option`.`pid` WHERE `tl_iso_attribute`.`optionsSource` = 'table' AND `tl_iso_attribute_option`.`cadeaubon_per_email` = '1' AND `tl_iso_attribute`.`field_name` = ?")
+          ->execute(array($field));
+        $perEmailIds = $objResult->fetchEach('id');
+        foreach ($selectedOptions as $selectedOption) {
+          if (in_array($selectedOption, $perEmailIds)) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
 
   /**
    * Returns true if the product is available

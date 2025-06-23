@@ -6,7 +6,8 @@
 $GLOBALS['TL_LANG']['MODEL']['tl_iso_product.cadeaubon']			= array('JvH Voucher', 'A JvH Voucher.');
 
 $GLOBALS['TL_LANG']['tl_nc_notification']['type']['jvh_cadeaubon'] = 'JvH Vouchers';
-$GLOBALS['TL_LANG']['tl_nc_notification']['type']['jvh_cadeaubon_created'] = array('JvH Voucher Email', '');
+$GLOBALS['TL_LANG']['tl_nc_notification']['type']['jvh_cadeaubon_created'] = array('JvH Voucher Email Created', '');
+$GLOBALS['TL_LANG']['tl_nc_notification']['type']['jvh_cadeaubon_email'] = array('JvH Voucher Email', '');
 
 $GLOBALS['TL_LANG']['FMD']['mod_jvh_cadeau_bonnen_checker'] = ['Coupon checker', ''];
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['invalid'] = 'Invalid coupon';
