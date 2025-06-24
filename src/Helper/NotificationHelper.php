@@ -77,10 +77,10 @@ class NotificationHelper
         foreach ($objAddress->row() as $k => $v) {
           $arrTokens = $this->flatten($v, 'shipping_address_' . $k, $arrTokens, $delimiter);
         }
+        $objConfig = $order->getRelated('config_id') ?: Isotope::getConfig();
+        Isotope::setConfig($objConfig);
+        $arrTokens['shipping_address'] = $objAddress->generate($objConfig->getShippingFieldsConfig());
       }
-      $objConfig = $order->getRelated('config_id') ?: Isotope::getConfig();
-      Isotope::setConfig($objConfig);
-      $arrTokens['shipping_address'] = $objAddress->generate($objConfig->getShippingFieldsConfig());
     }
 
     if ($item) {
