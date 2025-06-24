@@ -7,7 +7,7 @@
 \Isotope\Model\Shipping::registerModelType('cadeaubon', 'JvH\CadeauBonnenBundle\Model\Shipping\Cadeaubon');
 
 $GLOBALS['BE_MOD']['isotope']['iso_rules']['send_email'] = [\JvH\CadeauBonnenBundle\Backend\Email::class, 'sendEmail'];
-
+$GLOBALS['BE_MOD']['isotope']['iso_rules']['tables'][] = 'tl_iso_rule_usage';
 $GLOBALS['FE_MOD']['isotope']['mod_jvh_cadeau_bonnen_checker'] = \JvH\CadeauBonnenBundle\Frontend\CadeabonChecker::class;
 
 /**
