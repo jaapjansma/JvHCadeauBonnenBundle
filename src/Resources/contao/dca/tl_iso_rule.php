@@ -37,6 +37,15 @@ $GLOBALS['TL_DCA']['tl_iso_rule']['fields']['jvh_cadeaubon'] = [
   'sql' => "char(1) NOT NULL default ''",
 ];
 
+$GLOBALS['TL_DCA']['tl_iso_rule']['fields']['pin'] = [
+  'label'                         => &$GLOBALS['TL_LANG']['tl_iso_rule']['pin'],
+  'exclude'                       => true,
+  'search'                        => true,
+  'inputType'                     => 'text',
+  'eval'                          => array('mandatory'=>true, 'maxlength'=>255),
+  'sql'                           => "varchar(255) NOT NULL default '0000'",
+];
+
 $GLOBALS['TL_DCA']['tl_iso_rule']['fields']['original_discount'] = [
   'label' => &$GLOBALS['TL_LANG']['tl_iso_rule']['original_discount'],
   'exclude' => true,
@@ -73,7 +82,8 @@ PaletteManipulator::create()
   ->addField('original_discount', 'discount', PaletteManipulator::POSITION_BEFORE)
   ->applyToPalette('cartsubtotal', 'tl_iso_rule');
 PaletteManipulator::create()
-  ->addField('jvh_cadeaubon', 'code', PaletteManipulator::POSITION_AFTER)
+  ->addField('pin', 'code', PaletteManipulator::POSITION_AFTER)
+  ->addField('jvh_cadeaubon', 'pin', PaletteManipulator::POSITION_AFTER)
   ->applyToSubpalette('enableCode', 'tl_iso_rule');
 PaletteManipulator::create()
   ->addLegend('order_legend', 'basic_legend', PaletteManipulator::POSITION_APPEND)

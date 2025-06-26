@@ -18,11 +18,37 @@ use Isotope\Module\Checkout;
 class UseCadaubon
 {
 
+  public function copiedCollectionItems(IsotopeProductCollection $oldCollection, IsotopeProductCollection $newCollection) {
+    /*if ($oldCollection instanceof Cart && $newCollection instanceof Order) {
+      $newCollection->coupons = $oldCollection->coupons;
+
+      $arrRules = $this->getCadeaubonnen($oldCollection);
+      $enhancedRules = $this->enhanceRules($arrRules, $oldCollection);
+      $surcharges = $newCollection->getSurcharges();
+      foreach ($surcharges as $key => $surcharge) {
+        if ($surcharge instanceof \Isotope\Model\ProductCollectionSurcharge\Rule) {
+          foreach($enhancedRules as $ruleId => $enhancedRule) {
+            if ($enhancedRule['available_discount_amount'] == $surcharge->total_price && $enhancedRule['label'] == $surcharge->label) {
+              $surcharge->total_price = $enhancedRule['discount_amount'];
+            }
+          }
+        }
+      }
+      $newCollection->save();
+    }*/
+  }
+
   public function addCollectionToTemplate(Template $objTemplate, array $arrItems, IsotopeProductCollection $objCollection, array $arrConfig) {
     $objConfig = Isotope::getConfig();
+    $cart = null;
     if ($objCollection instanceof Cart) {
-      $arrRules = $this->getCadeaubonnen($objCollection);
-      $enhancedRules = $this->enhanceRules($arrRules, $objCollection);
+      $cart = $objCollection;
+    } elseif ($objCollection instanceof Order && $objCollection->source_collection_id) {
+      $cart = Cart::findByPk($objCollection->source_collection_id);
+    }
+    if ($cart) {
+      $arrRules = $this->getCadeaubonnen($cart);
+      $enhancedRules = $this->enhanceRules($arrRules, $cart);
       $surcharges = $objCollection->getSurcharges();
       foreach ($surcharges as $key => $surcharge) {
         if ($surcharge instanceof \Isotope\Model\ProductCollectionSurcharge\Rule) {
@@ -63,13 +89,24 @@ class UseCadaubon
 
     public function preCheckout(Order $order, Checkout $module)
     {
-      $changedRules = [];
       $arrRules = [];
       $objCart = Cart::findByPk($order->source_collection_id);
       if ($objCart !== null) {
         $arrRules = $this->getCadeaubonnen($objCart);
       }
       $order->jvhCadeauBonnen = $this->enhanceRules($arrRules, $order);;
+
+
+      /*$surcharges = $order->getSurcharges();
+      foreach ($surcharges as $key => $surcharge) {
+        if ($surcharge instanceof \Isotope\Model\ProductCollectionSurcharge\Rule) {
+          foreach($order->jvhCadeauBonnen as $ruleId => $enhancedRule) {
+            if ($enhancedRule['available_discount_amount'] == $surcharge->total_price && $enhancedRule['label'] == $surcharge->label) {
+              $surcharge->total_price = $enhancedRule['discount_amount'];
+            }
+          }
+        }
+      }*/
     }
 
     public function postCheckout(Order $order, array $arrTokens) {
@@ -86,6 +123,18 @@ class UseCadaubon
           $rule->$f = $v;
         }
         $rule->save();
+      }
+
+      $surcharges = $order->getSurcharges();
+      foreach ($surcharges as $key => $surcharge) {
+        if ($surcharge instanceof \Isotope\Model\ProductCollectionSurcharge\Rule) {
+          foreach($settings['jvhCadeauBonnen'] as $ruleId => $enhancedRule) {
+            if ($enhancedRule['available_discount_amount'] == $surcharge->total_price && $enhancedRule['label'] == $surcharge->label) {
+              $surcharge->total_price = $enhancedRule['discount_amount'];
+              $surcharge->save();
+            }
+          }
+        }
       }
     }
 

@@ -8,6 +8,7 @@ use Contao\System;
 use Haste\Util\Format;
 use Isotope\Isotope;
 use Isotope\Model\Address;
+use Isotope\Model\Document;
 use Isotope\Model\ProductCollection\Order;
 use Isotope\Model\ProductCollectionItem;
 use Isotope\Model\Rule;
@@ -34,6 +35,9 @@ class NotificationHelper
 
     $arrTokens = array();
     $arrTokens['recipient_email'] = $rule->email;
+    $arrTokens['code'] = $rule->code;
+    $arrTokens['pin'] = $rule->pin;
+    $arrTokens['discount'] = Isotope::formatPrice(abs($rule->discount));
 
     $row = $rule->row();
     foreach ($row as $k => $v) {
@@ -94,7 +98,17 @@ class NotificationHelper
     if (null !== $objNotificationCollection) {
       $objNotificationCollection->reset();
       while ($objNotificationCollection->next()) {
+        $arrTokens['document'] = '';
         $objNotification = $objNotificationCollection->current();
+        // Generate and "attach" document
+        /** @var \Isotope\Interfaces\IsotopeDocument $objDocument */
+        if ($objNotification->iso_document > 0
+          && (($objDocument = Document::findByPk($objNotification->iso_document)) !== null)
+        ) {
+          $strFilePath           = \JvH\CadeauBonnenBundle\Helper\Document::outputToFile($objDocument, $arrTokens, TL_ROOT . '/system/tmp');
+          $arrTokens['document'] = str_replace(TL_ROOT . '/', '', $strFilePath);
+        }
+
         $objNotification->send($arrTokens);
         $count++;
       }

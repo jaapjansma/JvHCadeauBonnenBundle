@@ -72,6 +72,7 @@ class GenerateCadaubon {
                         $endDate->modify('+3 year');
                         $rule->endDate = $endDate->getTimestamp();
                         $rule->code = $this->getUniqueCode($order->getId());
+                        $rule->pin = $this->getPin();
                         $rule->save();
                         if ($product->isPerEmail()) {
                           $this->notificationHelper->sendCodePerEmail('jvh_cadeaubon_created', $rule, $item, $order);
@@ -96,6 +97,21 @@ class GenerateCadaubon {
         } while ($rule !== null);
         return $code;
     }
+
+  /**
+   * Generates a unique code
+   *
+   * @see CodeGenerator::generateCode()
+   * @return string
+   */
+  public function getPin(): string {
+    $numbers = "0123456789";
+    $pin = '';
+    for ($i = 0; $i < 4; $i++) {
+      $pin .= $numbers[mt_rand(0, strlen($numbers)-1)];
+    }
+    return $pin;
+  }
 
     /**
      * Generate a code like ABCD-FGHUU1234-EFGH

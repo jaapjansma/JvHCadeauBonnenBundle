@@ -52,8 +52,9 @@ class CadeabonChecker extends Module {
   {
     if ($code = Input::get('code')) {
       $this->Template->code = $code;
+      $this->Template->pin = Input::get('pin');
       $objRule = Rule::findOneByCouponCode($code, []);
-      if ($objRule && $objRule->jvh_cadeaubon && $objRule->applyTo == 'subtotal' && !$objRule->isPercentage()) {
+      if ($objRule && $objRule->jvh_cadeaubon && $objRule->applyTo == 'subtotal' && !$objRule->isPercentage() && strlen($objRule->pin) && $objRule->pin == Input::get('pin')) {
         $this->Template->status = sprintf($GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['discount'], number_format(abs($objRule->discount), 2, ',', '.'));
       } else {
         $this->Template->status = $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['invalid'];

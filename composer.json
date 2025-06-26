@@ -3,7 +3,7 @@
   "description":"Cadeaubonnen functionaliteit voor JvH",
   "type": "contao-bundle",
   "license":"LGPL-3.0-or-later",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "repositories": [
     {
       "type": "path",
@@ -16,7 +16,8 @@
     "symfony/dependency-injection": "^4.4 || ^5.1",
     "symfony/http-kernel": "^4.4 || ^5.1",
     "iwd-nl/snelstart-php": "*",
-    "krabo/snelstart-bundle": "^1.3.0"
+    "krabo/snelstart-bundle": "^1.3.0",
+    "inspiredminds/contao-isotope-pdf-templates": "*"
   },
   "extra": {
     "contao-manager-plugin": "JvH\\CadeauBonnenBundle\\ContaoManager\\Plugin"

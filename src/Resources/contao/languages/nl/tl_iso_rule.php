@@ -8,3 +8,4 @@ $GLOBALS['TL_LANG']['tl_iso_rule']['send_email'] = ['Verstuur code per e-mail', 
 $GLOBALS['TL_LANG']['tl_iso_rule']['usage'] = ['Bekijk gebruik', 'Bekijk gebruik'];
 $GLOBALS['TL_LANG']['tl_iso_rule']['email_send'] = '%s E-mail(s) verstuurd';
 $GLOBALS['TL_LANG']['tl_iso_rule']['order_legend'] = 'Aanschaf';
+$GLOBALS['TL_LANG']['tl_iso_rule']['pin'] = ['Pin code', ''];

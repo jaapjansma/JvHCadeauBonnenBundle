@@ -5,6 +5,7 @@ namespace JvH\CadeauBonnenBundle\ContaoManager;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
+use InspiredMinds\ContaoIsotopePdfTemplatesBundle\ContaoIsotopePdfTemplatesBundle;
 
 class Plugin implements BundlePluginInterface
 {
@@ -12,7 +13,7 @@ class Plugin implements BundlePluginInterface
     {
         return [
             BundleConfig::create('JvH\CadeauBonnenBundle\CadeauBonnenBundle')
-                ->setLoadAfter(['isotope', 'Krabo\SnelstartBundle\SnelstartBundle']),
+                ->setLoadAfter(['isotope', 'Krabo\SnelstartBundle\SnelstartBundle', ContaoIsotopePdfTemplatesBundle::class]),
         ];
     }
 
