@@ -41,10 +41,10 @@ class NotificationHelper
     $arrTokens['startDate'] = '';
     $arrTokens['endDate'] = '';
     if ($rule->startDate) {
-      $arrTokens['startDate'] = date('d-m-Y', strtotime($rule->startDate));
+      $arrTokens['startDate'] = date('d-m-Y', $rule->startDate);
     }
     if ($rule->endDate) {
-      $arrTokens['endDate'] = date('d-m-Y', strtotime($rule->endDate));
+      $arrTokens['endDate'] = date('d-m-Y', $rule->endDate);
     }
 
     $row = $rule->row();
