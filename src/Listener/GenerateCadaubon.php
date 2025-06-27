@@ -40,6 +40,12 @@ class GenerateCadaubon {
             $newStatus = OrderStatus::findByPk($newStatus);
         }
 
+        $email = '';
+        $matches = [];
+        if (preg_match('/(.*[^\s])\s*<\s*(.*[^\s])\s*>/', $order->getEmailRecipient(), $matches, PREG_OFFSET_CAPTURE, 0)) {
+          $email = $matches[2][0];
+        }
+
         if (!$wasPaid && $newStatus->isPaid()) {
             foreach ($order->getItems() as $item) {
                 if (($product = $item->getProduct()) && $product instanceof Cadeaubon) {
@@ -67,7 +73,7 @@ class GenerateCadaubon {
                         $rule->enabled = 1;
                         $rule->jvh_cadeaubon = 1;
                         $rule->product_collection_item_id = $item->id;
-                        $rule->email = $order->getEmailRecipient();
+                        $rule->email = $email;
                         $startDate = new \DateTime();
                         $rule->startDate = $startDate->getTimestamp();
                         $endDate = new \DateTime();
