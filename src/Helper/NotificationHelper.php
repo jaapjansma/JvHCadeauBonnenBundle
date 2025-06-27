@@ -38,6 +38,14 @@ class NotificationHelper
     $arrTokens['code'] = $rule->code;
     $arrTokens['pin'] = $rule->pin;
     $arrTokens['discount'] = Isotope::formatPrice(abs($rule->discount));
+    $arrTokens['startDate'] = '';
+    $arrTokens['endDate'] = '';
+    if ($rule->startDate) {
+      $arrTokens['startDate'] = date('d-m-Y', strtotime($rule->startDate));
+    }
+    if ($rule->endDate) {
+      $arrTokens['endDate'] = date('d-m-Y', strtotime($rule->endDate));
+    }
 
     $row = $rule->row();
     foreach ($row as $k => $v) {

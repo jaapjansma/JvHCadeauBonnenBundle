@@ -68,6 +68,8 @@ class GenerateCadaubon {
                         $rule->jvh_cadeaubon = 1;
                         $rule->product_collection_item_id = $item->id;
                         $rule->email = $order->getEmailRecipient();
+                        $startDate = new \DateTime();
+                        $rule->startDate = $startDate->getTimestamp();
                         $endDate = new \DateTime();
                         $endDate->modify('+3 year');
                         $rule->endDate = $endDate->getTimestamp();
