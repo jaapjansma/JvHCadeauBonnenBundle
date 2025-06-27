@@ -12,6 +12,7 @@ $GLOBALS['TL_LANG']['tl_nc_notification']['type']['jvh_cadeaubon_email'] = array
 
 $GLOBALS['TL_LANG']['FMD']['mod_jvh_cadeau_bonnen_checker'] = ['Coupon checker', ''];
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['invalid'] = 'Invalid coupon';
+$GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['invalid_pin'] = 'Enter a valid PIN';
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['discount'] = 'Balance: € %s';
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['code'] = 'Code';
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['pin'] = 'Pin';
