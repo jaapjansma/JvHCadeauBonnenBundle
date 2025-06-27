@@ -37,7 +37,7 @@ class NotificationHelper
     $arrTokens['recipient_email'] = $rule->email;
     $arrTokens['code'] = $rule->code;
     $arrTokens['pin'] = $rule->pin;
-    $arrTokens['discount'] = Isotope::formatPrice(abs($rule->discount));
+    $arrTokens['discount'] = str_replace(",00", ",-", Isotope::formatPrice(abs($rule->discount)));
     $arrTokens['startDate'] = '';
     $arrTokens['endDate'] = '';
     if ($rule->startDate) {
