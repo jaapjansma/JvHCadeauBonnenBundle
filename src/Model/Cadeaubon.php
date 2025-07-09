@@ -29,17 +29,21 @@ class Cadeaubon extends Standard implements WeightAggregate
         if ($hasCadeaBonPerEmailOption > 0) {
           $fieldWithPerEmailPresent = true;
         }
-        foreach ($selectedOptions as $selectedOption) {
-          if (!in_array($selectedOption, $perEmailIds)) {
-            $someRequireShipping = true;
+        if (is_array($selectedOptions)) {
+          foreach ($selectedOptions as $selectedOption) {
+            if (!in_array($selectedOption, $perEmailIds)) {
+              $someRequireShipping = true;
+            }
           }
+        } elseif (!in_array($selectedOptions, $perEmailIds)) {
+          $someRequireShipping = true;
         }
       }
     }
     if ($fieldWithPerEmailPresent && !$someRequireShipping) {
       return true;
     }
-    $return = parent::isExemptFromShipping();
+    return parent::isExemptFromShipping();
   }
 
   public function isPerEmail(): bool
@@ -51,10 +55,14 @@ class Cadeaubon extends Standard implements WeightAggregate
         $objResult = $db->prepare("SELECT `tl_iso_attribute_option`.`id` AS `id` FROM `tl_iso_attribute` INNER JOIN `tl_iso_attribute_option` ON `tl_iso_attribute`.`id` = `tl_iso_attribute_option`.`pid` WHERE `tl_iso_attribute`.`optionsSource` = 'table' AND `tl_iso_attribute_option`.`cadeaubon_per_email` = '1' AND `tl_iso_attribute`.`field_name` = ?")
           ->execute(array($field));
         $perEmailIds = $objResult->fetchEach('id');
-        foreach ($selectedOptions as $selectedOption) {
-          if (in_array($selectedOption, $perEmailIds)) {
-            return true;
+        if (is_array($selectedOptions)) {
+          foreach ($selectedOptions as $selectedOption) {
+            if (in_array($selectedOption, $perEmailIds)) {
+              return true;
+            }
           }
+        } elseif (in_array($selectedOptions, $perEmailIds)) {
+            return true;
         }
       }
     }

@@ -18,26 +18,6 @@ use Isotope\Module\Checkout;
 class UseCadaubon
 {
 
-  public function copiedCollectionItems(IsotopeProductCollection $oldCollection, IsotopeProductCollection $newCollection) {
-    /*if ($oldCollection instanceof Cart && $newCollection instanceof Order) {
-      $newCollection->coupons = $oldCollection->coupons;
-
-      $arrRules = $this->getCadeaubonnen($oldCollection);
-      $enhancedRules = $this->enhanceRules($arrRules, $oldCollection);
-      $surcharges = $newCollection->getSurcharges();
-      foreach ($surcharges as $key => $surcharge) {
-        if ($surcharge instanceof \Isotope\Model\ProductCollectionSurcharge\Rule) {
-          foreach($enhancedRules as $ruleId => $enhancedRule) {
-            if ($enhancedRule['available_discount_amount'] == $surcharge->total_price && $enhancedRule['label'] == $surcharge->label) {
-              $surcharge->total_price = $enhancedRule['discount_amount'];
-            }
-          }
-        }
-      }
-      $newCollection->save();
-    }*/
-  }
-
   public function addCollectionToTemplate(Template $objTemplate, array $arrItems, IsotopeProductCollection $objCollection, array $arrConfig) {
     $objConfig = Isotope::getConfig();
     $cart = null;
@@ -95,18 +75,6 @@ class UseCadaubon
         $arrRules = $this->getCadeaubonnen($objCart);
       }
       $order->jvhCadeauBonnen = $this->enhanceRules($arrRules, $order);;
-
-
-      /*$surcharges = $order->getSurcharges();
-      foreach ($surcharges as $key => $surcharge) {
-        if ($surcharge instanceof \Isotope\Model\ProductCollectionSurcharge\Rule) {
-          foreach($order->jvhCadeauBonnen as $ruleId => $enhancedRule) {
-            if ($enhancedRule['available_discount_amount'] == $surcharge->total_price && $enhancedRule['label'] == $surcharge->label) {
-              $surcharge->total_price = $enhancedRule['discount_amount'];
-            }
-          }
-        }
-      }*/
     }
 
     public function postCheckout(Order $order, array $arrTokens) {
@@ -163,12 +131,20 @@ class UseCadaubon
             $saldo = $saldo + (-1 * $rule->discount);
             $changedRules[$rule->id]['enabled'] = '1';
             $changedRules[$rule->id]['discount_amount'] = $rule->discount;
+            $changedRules[$rule->id]['limitPerConfig'] = $rule->limitPerConfig;
+            if ($rule->limitPerConfig > 0) {
+              $changedRules[$rule->id]['limitPerConfig']++;
+            }
           } elseif ($saldo < 0) {
             if (!strlen($rule->original_discount)) {
               $changedRules[$rule->id]['original_discount'] = $rule->discount;
             }
             $changedRules[$rule->id]['discount'] = $saldo;
             $changedRules[$rule->id]['discount_amount'] = $rule->discount - $saldo;
+            $changedRules[$rule->id]['limitPerConfig'] = $rule->limitPerConfig;
+            if ($rule->limitPerConfig > 0) {
+              $changedRules[$rule->id]['limitPerConfig']++;
+            }
             $changedRules[$rule->id]['enabled'] = '1';
             $saldo = 0;
           } else {

@@ -59,7 +59,7 @@ class GenerateCadaubon {
                         $rule->rounding = 'normal';
                         $rule->enableCode = 1;
                         $rule->limitPerMember = 0;
-                        $rule->limitPerConfig = 1;
+                        $rule->limitPerConfig = 0;
                         $rule->minSubtotal = 0;
                         $rule->maxSubtotal = 0;
                         $rule->minItemQuantity = 0;
