@@ -84,6 +84,13 @@ class NotificationHelper
         }
       }
 
+      // Add billing address fields
+      if (($objAddress = $order->getBillingAddress()) !== null) {
+        foreach ($objAddress->row() as $k => $v) {
+          $arrTokens = $this->flatten($v, 'billing_address_' . $k, $arrTokens, $delimiter);
+        }
+      }
+
       // Add shipping address fields
       if (($objAddress = $order->getShippingAddress()) !== null) {
         foreach ($objAddress->row() as $k => $v) {
