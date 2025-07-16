@@ -50,7 +50,11 @@ class Email extends Backend {
       }
     }
     if ($rule->email) {
-      $count = $this->notificationHelper->sendCodePerEmail('jvh_cadeaubon_email', $rule, $item, $order);
+      if ($rule->product_collection_item_id && $order) {
+        $count = $this->notificationHelper->sendCodePerEmail('jvh_cadeaubon_created', $rule, $item, $order);
+      } else {
+        $count = $this->notificationHelper->sendCodePerEmail('jvh_cadeaubon_email', $rule, $item, $order);
+      }
       Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_iso_rule']['email_send'], $count));
     }
     $url = str_replace('&key=send_email', '', \Environment::get('request'));

@@ -84,6 +84,8 @@ class GenerateCadaubon {
                         $rule->save();
                         if ($product->isPerEmail()) {
                           $this->notificationHelper->sendCodePerEmail('jvh_cadeaubon_created', $rule, $item, $order);
+                        } else {
+                          $this->notificationHelper->sendCodePerEmail('jvh_cadeaubon_created_per_post', $rule, $item, $order);
                         }
                     }
                 }

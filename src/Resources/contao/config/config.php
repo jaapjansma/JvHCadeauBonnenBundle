@@ -34,6 +34,17 @@ $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadea
 $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created']['file_content'] = $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created']['email_text'];
 $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created']['attachment_tokens'] = ['document'];
 
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['recipients'] = ['recipient_email'];
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['email_replyTo'] = &$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['recipients'];
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['email_recipient_cc'] = &$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['recipients'];
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['email_recipient_bcc'] = &$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['recipients'];
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['email_text'] = ['recipient_email', 'code', 'pin', 'discount', 'startDate', 'endDate', 'member_*', 'product_*', 'rule_*', 'order_*', 'form_*', 'billing_address_*', 'shipping_address_*', 'shipping_address', 'document'];
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['email_subject'] = $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['email_text'];
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['email_html'] = $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['email_text'];
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['file_name'] = $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['email_text'];
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['file_content'] = $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['email_text'];
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_created_per_post']['attachment_tokens'] = ['document'];
+
 $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_email']['recipients'] = ['recipient_email'];
 $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_email']['email_replyTo'] = &$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_email']['recipients'];
 $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_email']['email_recipient_cc'] = &$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['jvh_cadeaubon']['jvh_cadeaubon_email']['recipients'];

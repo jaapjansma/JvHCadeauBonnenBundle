@@ -8,6 +8,7 @@ $GLOBALS['TL_LANG']['MODEL']['tl_iso_document']['cadeaubon'] = ['Voucher', 'Vouc
 
 $GLOBALS['TL_LANG']['tl_nc_notification']['type']['jvh_cadeaubon'] = 'JvH Vouchers';
 $GLOBALS['TL_LANG']['tl_nc_notification']['type']['jvh_cadeaubon_created'] = array('JvH Voucher Email Created', '');
+$GLOBALS['TL_LANG']['tl_nc_notification']['type']['jvh_cadeaubon_created_per_post'] = array('JvH Voucher Per Post Created', '');
 $GLOBALS['TL_LANG']['tl_nc_notification']['type']['jvh_cadeaubon_email'] = array('JvH Voucher Email', '');
 
 $GLOBALS['TL_LANG']['FMD']['mod_jvh_cadeau_bonnen_checker'] = ['Coupon checker', ''];
@@ -17,3 +18,4 @@ $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['discount'] = 'Balance: €
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['code'] = 'Code';
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['pin'] = 'Pin';
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['submit'] = 'Check coupon';
+$GLOBALS['TL_LANG']['jvh_cadeau_bonnen_surcharge_label'] = 'Voucher of € %s';

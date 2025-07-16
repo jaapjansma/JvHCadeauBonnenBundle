@@ -68,7 +68,7 @@ $GLOBALS['TL_DCA']['tl_iso_rule']['fields']['email'] = [
   'exclude' => true,
   'search' => true,
   'inputType' => 'text',
-  'eval' => array('mandatory' => false, 'maxlength' => 255, 'rgxp' => 'email', 'unique' => true, 'decodeEntities' => true, 'tl_class' => 'clr'),
+  'eval' => array('mandatory' => false, 'maxlength' => 255, 'rgxp' => 'email', 'decodeEntities' => true, 'tl_class' => 'clr'),
   'sql' => "varchar(255) NOT NULL default ''"
 ];
 

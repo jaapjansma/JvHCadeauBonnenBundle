@@ -33,9 +33,12 @@ class UseCadaubon
       foreach ($surcharges as $key => $surcharge) {
         if ($surcharge instanceof \Isotope\Model\ProductCollectionSurcharge\Rule) {
           foreach($enhancedRules as $ruleId => $enhancedRule) {
-            if ($enhancedRule['available_discount_amount'] == $surcharge->total_price && $enhancedRule['label'] == $surcharge->label) {
+            if ($enhancedRule['available_discount_amount'] == $surcharge->total_price && $enhancedRule['original_label'] == $surcharge->label) {
               $surcharges[$key]->total_price = $enhancedRule['discount_amount'];
               $surcharges[$key]->code = $enhancedRule['code'];
+              $surcharges[$key]->label = $enhancedRule['label'];
+            } elseif ($enhancedRule['original_label'] == $surcharge->label) {
+              $surcharges[$key]->label = $enhancedRule['label'];
             }
           }
         }
@@ -97,8 +100,12 @@ class UseCadaubon
       foreach ($surcharges as $key => $surcharge) {
         if ($surcharge instanceof \Isotope\Model\ProductCollectionSurcharge\Rule) {
           foreach($settings['jvhCadeauBonnen'] as $ruleId => $enhancedRule) {
-            if ($enhancedRule['available_discount_amount'] == $surcharge->total_price && $enhancedRule['label'] == $surcharge->label) {
+            if ($enhancedRule['available_discount_amount'] == $surcharge->total_price && $enhancedRule['original_label'] == $surcharge->label) {
               $surcharge->total_price = $enhancedRule['discount_amount'];
+              $surcharge->label = $enhancedRule['label'];
+              $surcharge->save();
+            } elseif ($enhancedRule['original_label'] == $surcharge->label) {
+              $surcharge->label = $enhancedRule['label'];
               $surcharge->save();
             }
           }
@@ -111,6 +118,11 @@ class UseCadaubon
       if ($objCollection->getTotal() > 0) {
         foreach ($arrRules as $rule) {
           $changedRules[$rule->id]['enabled'] = '0';
+          $changedRules[$rule->id]['original_label'] = $rule->label;
+          if (empty($rule->label)) {
+            $changedRules[$rule->id]['original_label'] = $rule->name;
+          }
+          $changedRules[$rule->id]['label'] = sprintf($GLOBALS['TL_LANG']['jvh_cadeau_bonnen_surcharge_label'], number_format(abs($rule->discount), 2, ',', '.'));
         }
       } else {
         $surchargeTotal = 0.00;
@@ -121,10 +133,11 @@ class UseCadaubon
         }
         $saldo = (float) $surchargeTotal + (float)$objCollection->getSubtotal();
         foreach ($arrRules as $rule) {
-          $changedRules[$rule->id]['label'] = $rule->label;
+          $changedRules[$rule->id]['original_label'] = $rule->label;
           if (empty($rule->label)) {
-            $changedRules[$rule->id]['label'] = $rule->name;
+            $changedRules[$rule->id]['original_label'] = $rule->name;
           }
+          $changedRules[$rule->id]['label'] = sprintf($GLOBALS['TL_LANG']['jvh_cadeau_bonnen_surcharge_label'], number_format(abs($rule->discount), 2, ',', '.'));
           $changedRules[$rule->id]['code'] = $rule->code;
           $changedRules[$rule->id]['available_discount_amount'] = (float) $rule->discount;
           if ($saldo < 0 && $rule->discount > $saldo) {
