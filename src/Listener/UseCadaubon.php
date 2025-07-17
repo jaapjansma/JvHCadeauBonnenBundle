@@ -39,6 +39,7 @@ class UseCadaubon
               $surcharges[$key]->label = $enhancedRule['label'];
             } elseif ($enhancedRule['original_label'] == $surcharge->label) {
               $surcharges[$key]->label = $enhancedRule['label'];
+              $surcharges[$key]->code = $enhancedRule['code'];
             }
           }
         }
@@ -117,6 +118,7 @@ class UseCadaubon
       $changedRules = [];
       if ($objCollection->getTotal() > 0) {
         foreach ($arrRules as $rule) {
+          $changedRules[$rule->id]['code'] = $rule->code;
           $changedRules[$rule->id]['enabled'] = '0';
           $changedRules[$rule->id]['original_label'] = $rule->label;
           if (empty($rule->label)) {
