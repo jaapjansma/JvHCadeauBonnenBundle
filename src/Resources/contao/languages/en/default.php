@@ -18,4 +18,4 @@ $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['discount'] = 'Balance: €
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['code'] = 'Code';
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['pin'] = 'Pin';
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['submit'] = 'Check coupon';
-$GLOBALS['TL_LANG']['jvh_cadeau_bonnen_surcharge_label'] = 'Voucher of € %s';
+$GLOBALS['TL_LANG']['jvh_cadeau_bonnen_surcharge_label'] = 'Promotional code of € %s';

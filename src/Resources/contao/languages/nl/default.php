@@ -18,4 +18,4 @@ $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['discount'] = 'Saldo: € %
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['code'] = 'Code';
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['pin'] = 'Pin';
 $GLOBALS['TL_LANG']['mod_jvh_cadeau_bonnen_checker']['submit'] = 'Controleer cadeaubon';
-$GLOBALS['TL_LANG']['jvh_cadeau_bonnen_surcharge_label'] = 'Cadeaubon t.w.v € %s';
+$GLOBALS['TL_LANG']['jvh_cadeau_bonnen_surcharge_label'] = 'Actiecode t.w.v € %s';
